@@ -1,0 +1,4 @@
+def trade(coin_data, h_values, l_values, sentiment_scores, bought_coins, sold_coins):\\n    coins = list(coin_data.keys())\\n    order = {}\\n    for coin in coins: \\n        score = sentiment_scores[coin] \\n        price = coin_data[coin]\\n        h_value = h_values[coin]\\n        l_value = l_values[coin]\\n        if (sold_coins[coin] > 0) and ((price + l_value) <= h_value): \\
+            order[coin] = ['buy', sold_coins[coin]]\\n        elif (coin not in bought_coins) and (score > 0.2) and (price >= h_value): \\
+            order[coin] = ['sell', 1]\\n        elif (coin in bought_coins) and (score < -0.08) and (price <= l_value): \\
+            order[coin] = ['sell', 1]\\n    return order
